@@ -1,0 +1,374 @@
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.page-container.narrow {
+  max-width: 860px;
+}
+
+.page-hero {
+  background: linear-gradient(180deg, #f7f3ee 0%, #f3ece4 100%);
+  padding: 112px 24px 78px;
+  border-bottom: 1px solid #e2d7ca;
+}
+
+.page-hero-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page-hero h1 {
+  margin: 0 0 18px;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #2f2925;
+}
+
+.page-hero-lead {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: #6d6257;
+}
+
+.center {
+  text-align: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.intro-section {
+  background: #fbf8f4;
+  padding: 74px 0;
+}
+
+.intro-copy {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  text-align: center;
+  color: #5f554b;
+}
+
+.featured-section {
+  background: #f7f3ee;
+  padding: 100px 0;
+}
+
+.section-heading {
+  margin: 0 0 18px;
+  font-size: 3rem;
+  line-height: 1.06;
+  color: #2f2925;
+}
+
+.section-copy {
+  max-width: 720px;
+  margin: 0 0 38px;
+  line-height: 1.8;
+  color: #6d6257;
+}
+
+.masters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.master-card {
+  background: #fbf8f4;
+  border: 1px solid #ddd2c5;
+  box-shadow: 0 16px 40px rgba(33, 23, 15, 0.08);
+  overflow: hidden;
+}
+
+.master-portrait {
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(34, 24, 16, 0.24), rgba(34, 24, 16, 0.24)),
+    radial-gradient(circle at top, #cdb288 0%, #a27b4a 52%, #6d5233 100%);
+  color: #f7f0e6;
+}
+
+.master-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portrait-initials {
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(247, 240, 230, 0.55);
+  border-radius: 50%;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+}
+
+.master-card-body {
+  padding: 24px 24px 26px;
+}
+
+.master-year {
+  display: inline-block;
+  margin: 0 0 14px;
+  color: #b8873f;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.master-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #231f1b;
+}
+
+.master-card p {
+  margin: 0;
+  line-height: 1.7;
+  color: #5f554b;
+}
+
+.archive-section {
+  background: #fbf8f4;
+  padding: 100px 0 110px;
+}
+
+.archive-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  gap: 54px;
+  align-items: start;
+}
+
+.archive-intro p {
+  margin: 0;
+  line-height: 1.8;
+  color: #6d6257;
+}
+
+.masters-table {
+  background: #fffdfa;
+  border: 1px solid #ddd2c5;
+  box-shadow: 0 12px 34px rgba(33, 23, 15, 0.06);
+}
+
+.master-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #ede3d8;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.master-row:last-child {
+  border-bottom: 0;
+}
+
+.master-row:hover,
+.master-row:focus-visible,
+.master-row.is-active {
+  background: #f8f1e8;
+}
+
+.master-row-year {
+  color: #b8873f;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.master-row-name {
+  color: #3c342e;
+  line-height: 1.6;
+}
+
+.page-note {
+  margin: 28px 0 0;
+  color: #7a7065;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.portrait-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.24s ease, visibility 0.24s ease;
+  z-index: 2000;
+}
+
+.portrait-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.portrait-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 17, 12, 0.72);
+}
+
+.portrait-modal-dialog {
+  position: relative;
+  width: min(920px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr);
+  background: #fbf8f4;
+  border: 1px solid #d8ccbe;
+  box-shadow: 0 24px 80px rgba(16, 12, 9, 0.3);
+  overflow: hidden;
+}
+
+.portrait-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 1px solid rgba(47, 41, 37, 0.16);
+  background: rgba(251, 248, 244, 0.92);
+  color: #2f2925;
+  padding: 10px 14px;
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.portrait-modal-media {
+  background: #221810;
+  min-height: 520px;
+}
+
+.portrait-modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portrait-modal-copy {
+  padding: 72px 42px 42px;
+}
+
+.portrait-modal-copy h2 {
+  margin: 0 0 16px;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  color: #2f2925;
+}
+
+.portrait-modal-year {
+  margin: 0;
+  color: #b8873f;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.page-cta {
+  background: #2a1f15;
+  color: #f3ece4;
+  padding: 100px 0;
+}
+
+.page-cta h2 {
+  margin: 0 0 18px;
+  color: #f3ece4;
+  font-size: 3rem;
+}
+
+.cta-copy {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  line-height: 1.8;
+  color: rgba(243, 236, 228, 0.86);
+}
+
+@media (max-width: 1000px) {
+  .masters-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .archive-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page-hero h1,
+  .section-heading,
+  .page-cta h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-hero {
+    padding: 88px 20px 60px;
+  }
+
+  .page-container {
+    padding: 0 18px;
+  }
+
+  .intro-copy {
+    font-size: 1.12rem;
+  }
+
+  .masters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .master-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px 18px;
+  }
+
+  .portrait-modal {
+    padding: 12px;
+  }
+
+  .portrait-modal-dialog {
+    grid-template-columns: 1fr;
+  }
+
+  .portrait-modal-media {
+    min-height: 360px;
+  }
+
+  .portrait-modal-copy {
+    padding: 28px 22px 24px;
+  }
+
+  .portrait-modal-copy h2 {
+    font-size: 2rem;
+  }
+}
