@@ -219,6 +219,8 @@ function setupPastMastersArchive() {
   const modalHideDuration = 240;
   let activeRow = null;
   let clearModalImageTimer = null;
+  let modalHistoryOpen = false;
+  let ignoreNextPopstate = false;
 
   setupImageFade(modalImage);
 
@@ -255,9 +257,14 @@ function setupPastMastersArchive() {
     modalYear.textContent = year;
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
+
+    if (!modalHistoryOpen) {
+      history.pushState({ ...history.state, pastMasterModal: true }, "");
+      modalHistoryOpen = true;
+    }
   }
 
-  function closeModal() {
+  function closeModal(fromHistory = false) {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     clearTimeout(clearModalImageTimer);
@@ -275,6 +282,15 @@ function setupPastMastersArchive() {
       activeRow.focus();
       activeRow = null;
     }
+
+    if (!fromHistory && modalHistoryOpen) {
+      modalHistoryOpen = false;
+      ignoreNextPopstate = true;
+      history.back();
+      return;
+    }
+
+    modalHistoryOpen = false;
   }
 
   archive.addEventListener("click", (event) => {
@@ -309,6 +325,17 @@ function setupPastMastersArchive() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && modal.classList.contains("is-open")) {
       closeModal();
+    }
+  });
+
+  window.addEventListener("popstate", () => {
+    if (ignoreNextPopstate) {
+      ignoreNextPopstate = false;
+      return;
+    }
+
+    if (modal.classList.contains("is-open")) {
+      closeModal(true);
     }
   });
 }
