@@ -91,7 +91,7 @@ const PAST_MASTERS = [
   { year: 2008, name: "WM Tim Wilson" },
   { year: 2009, name: "WM Don Rushton" },
   { year: 2010, name: "WM John Bibby" },
-  { year: 2011, name: "WM Paul Handby-Holmes" },
+  { year: 2011, name: "WM Paul Hanby-Holmes" },
   { year: 2012, name: "WM Russell Granville" },
   { year: 2013, name: "WM Giuseppe Muratore" },
   { year: 2014, name: "WM Ralph Kelsall" },

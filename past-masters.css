@@ -266,6 +266,8 @@
   letter-spacing: 0.08em;
   font-size: 0.72rem;
   cursor: pointer;
+  z-index: 5;
+  transition: opacity 0.24s ease, transform 0.24s ease, background-color 0.24s ease;
 }
 
 .portrait-modal-media {
@@ -370,6 +372,10 @@
 
   .portrait-modal-dialog {
     grid-template-columns: 1fr;
+  }
+
+  .portrait-modal-close {
+    display: none;
   }
 
   .portrait-modal-media {
