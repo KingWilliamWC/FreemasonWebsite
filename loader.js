@@ -317,7 +317,7 @@ function renderPastMasters() {
 
 function renderFeaturedMasterCard(master) {
   const image = getPastMasterImagePath(master);
-  const description = master.description || "Update this entry with the brother's full name and final portrait when ready.";
+  const description = master.description || "";
 
   return `
     <article class="master-card">
