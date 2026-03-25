@@ -38,8 +38,8 @@ body {
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 47px;
+  height: 47px;
   border: 1px solid #b88b4a;
   border-radius: 50%;
   display: flex;
@@ -50,8 +50,8 @@ body {
 }
 
 .logo-icon img {
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
 }
 
 .logo-text .title {

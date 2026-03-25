@@ -31,6 +31,83 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const PAST_MASTERS_DEFAULT_IMAGE = "https://placehold.co/800x1000/e7ddd0/5a5046?text=Past+Master";
+const PAST_MASTERS_PHOTO_DIRECTORY = "past-masters";
+const PAST_MASTERS_FEATURED_COUNT = 9;
+const PAST_MASTERS_START_YEAR = 1956;
+const PAST_MASTERS = [
+  { year: 2025, name: "WM Ian Miller" },
+  { year: 2024, name: "WM Adrian Hutt" },
+  { year: 2023, name: "WM Brian Whittingslow" },
+  { year: 2022, name: "WM Paul Cross" },
+  { year: 2021, name: "Unknown Right now" },
+  { year: 2020, name: "Unknown Right now" },
+  { year: 2019, name: "Unknown Right now" },
+  { year: 2018, name: "Unknown Right now" },
+  { year: 2017, name: "Unknown Right now" },
+  { year: 2016, name: "Unknown Right now" },
+  { year: 2015, name: "WM David Darby" },
+  { year: 2014, name: "WM Dean Clarke" },
+  { year: 2013, name: "WM Matt Smallman" },
+  { year: 2012, name: "WM Gary Prosser" },
+  { year: 2011, name: "WM Ralph Kesall" },
+  { year: 2010, name: "WM Gisueppe Muratore" },
+  { year: 2009, name: "WM Russell Granville" },
+  { year: 2008, name: "WM Paul Handby-Holmes" },
+  { year: 2007, name: "WM John Bibby" },
+  { year: 2006, name: "WM Don Rushton" },
+  { year: 2005, name: "WM Tim Wilson" },
+  { year: 2004, name: "WM Delmun Penney" },
+  { year: 2003, name: "WM Dave Leggott" },
+  { year: 2002, name: "WM Brian Avery" },
+  { year: 2001, name: "WM Rob Clark" },
+  { year: 2000, name: "WM Dave Waller" },
+  { year: 1999, name: "WM Brain Whittinglsow" },
+  { year: 1998, name: "WM Alan Humphreys" },
+  { year: 1997, name: "WM Kevin Fletcher" },
+  { year: 1996, name: "WM Eric Greenfield" },
+  { year: 1995, name: "WM David Cherington" },
+  { year: 1994, name: "WM Paul Taylor" },
+  { year: 1993, name: "WM Brian Coaley" },
+  { year: 1992, name: "WM Bob Hesketh" },
+  { year: 1991, name: "WM Dick King" },
+  { year: 1990, name: "WM Alan Bruno" },
+  { year: 1989, name: "WM Alan Dally" },
+  { year: 1988, name: "WM Adrian Hutt" },
+  { year: 1987, name: "WM Tom Dunderdale" },
+  { year: 1986, name: "WM Des Davies" },
+  { year: 1985, name: "WM Rex Caulkin" },
+  { year: 1984, name: "WM Colin Edwards" },
+  { year: 1983, name: "WM Don Clay" },
+  { year: 1982, name: "WM Roy Finch" },
+  { year: 1981, name: "WM Doug MacMillan" },
+  { year: 1980, name: "WM Bob Drake" },
+  { year: 1979, name: "WM Roy Oseman" },
+  { year: 1978, name: "WM John Spicer" },
+  { year: 1977, name: "WM Ron Slingsby" },
+  { year: 1976, name: "WM Alan Foley" },
+  { year: 1975, name: "WM Doug Stevens" },
+  { year: 1974, name: "WM Stan Brickwell" },
+  { year: 1973, name: "WM Brian Smith" },
+  { year: 1972, name: "WM Ronald Skan" },
+  { year: 1971, name: "WM Roland Garrett" },
+  { year: 1970, name: "WM Leslie Warner" },
+  { year: 1969, name: "WM John Worrall" },
+  { year: 1968, name: "WM Roly Townsend" },
+  { year: 1967, name: "WM Bert Street" },
+  { year: 1966, name: "WM Arthur Evans" },
+  { year: 1965, name: "WM Harold Edwards" },
+  { year: 1964, name: "WM Berty Webb" },
+  { year: 1963, name: "WM Percy Parry" },
+  { year: 1962, name: "WM Cecil Charles" },
+  { year: 1961, name: "WM Frank Lofthouse" },
+  { year: 1960, name: "WM Greg Rackstraw" },
+  { year: 1959, name: "WM Bob Weeks" },
+  { year: 1958, name: "WM Frank Norman" },
+  { year: 1957, name: "WM Reuben Thompson" },
+  { year: 1956, name: "WM Phillip Mayne" },
+];
+
 function setupMobileNavigation() {
   const menuToggle = document.getElementById("menu-toggle");
   const nav = document.getElementById("nav");
@@ -124,6 +201,8 @@ function setupScrollReveal() {
 }
 
 function setupPastMastersArchive() {
+  renderPastMasters();
+
   const archive = document.querySelector("[data-interactive-archive]");
   const modal = document.getElementById("portrait-modal");
 
@@ -134,8 +213,12 @@ function setupPastMastersArchive() {
   const modalImage = document.getElementById("portrait-modal-image");
   const modalTitle = document.getElementById("portrait-modal-title");
   const modalYear = document.getElementById("portrait-modal-year");
-  const defaultImage = archive.dataset.defaultImage || "";
+  const defaultImage = archive.dataset.defaultImage || PAST_MASTERS_DEFAULT_IMAGE;
   let activeRow = null;
+
+  modalImage.addEventListener("error", () => {
+    modalImage.src = defaultImage;
+  });
 
   archive.querySelectorAll(".master-row").forEach((row) => {
     row.tabIndex = 0;
@@ -212,4 +295,74 @@ function setupPastMastersArchive() {
       closeModal();
     }
   });
+}
+
+function renderPastMasters() {
+  const featuredTarget = document.getElementById("featured-masters");
+  const archiveTarget = document.getElementById("archive-masters");
+
+  if (!featuredTarget || !archiveTarget) {
+    return;
+  }
+
+  const records = PAST_MASTERS.slice().sort((a, b) => b.year - a.year);
+  const featured = records.slice(0, PAST_MASTERS_FEATURED_COUNT);
+  const archive = records.slice(PAST_MASTERS_FEATURED_COUNT);
+
+  featuredTarget.innerHTML = featured.map(renderFeaturedMasterCard).join("");
+  archiveTarget.innerHTML = archive.map(renderArchiveMasterRow).join("");
+}
+
+function renderFeaturedMasterCard(master) {
+  const image = getPastMasterImagePath(master);
+  const description = master.description || "Update this entry with the brother's full name and final portrait when ready.";
+
+  return `
+    <article class="master-card">
+      <div class="master-portrait">
+        <img src="${image}" alt="${escapeHtml(master.name)} portrait" onerror="this.onerror=null;this.src='${PAST_MASTERS_DEFAULT_IMAGE}'">
+      </div>
+      <div class="master-card-body">
+        <p class="master-year">${escapeHtml(String(master.year))}</p>
+        <h3>${escapeHtml(master.name)}</h3>
+        <p>${escapeHtml(description)}</p>
+      </div>
+    </article>
+  `;
+}
+
+function renderArchiveMasterRow(master) {
+  const image = getPastMasterImagePath(master);
+
+  return `
+    <div class="master-row" data-image="${image}">
+      <div class="master-row-year">${escapeHtml(String(master.year))}</div>
+      <div class="master-row-name">${escapeHtml(master.name)}</div>
+    </div>
+  `;
+}
+
+function getPastMasterImagePath(master) {
+  if (master.image) {
+    return master.image;
+  }
+
+  if (master.photo) {
+    return `${PAST_MASTERS_PHOTO_DIRECTORY}/${master.photo}.jpg`;
+  }
+
+  if (master.year >= PAST_MASTERS_START_YEAR) {
+    return `${PAST_MASTERS_PHOTO_DIRECTORY}/${master.year - PAST_MASTERS_START_YEAR + 1}.jpg`;
+  }
+
+  return PAST_MASTERS_DEFAULT_IMAGE;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
