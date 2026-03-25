@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Past Master Placeholder</title>
+  <desc id="desc">Generic placeholder portrait for a Past Master image.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#efe4d6" />
+      <stop offset="100%" stop-color="#d8c7b1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)" />
+  <circle cx="400" cy="350" r="120" fill="#8c7b69" opacity="0.9" />
+  <path d="M210 760c30-155 140-240 190-240s160 85 190 240" fill="#8c7b69" opacity="0.9" />
+  <text x="400" y="875" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="42" fill="#4d443c" letter-spacing="4">
+    PAST MASTER
+  </text>
+</svg>

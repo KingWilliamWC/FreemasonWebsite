@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const PAST_MASTERS_DEFAULT_IMAGE = "https://placehold.co/800x1000/e7ddd0/5a5046?text=Past+Master";
+const PAST_MASTERS_DEFAULT_IMAGE = "past-masters/placeholder.svg";
 const PAST_MASTERS_PHOTO_DIRECTORY = "past-masters";
 const PAST_MASTERS_FEATURED_COUNT = 9;
 const PAST_MASTERS_START_YEAR = 1956;
@@ -216,7 +216,11 @@ function setupPastMastersArchive() {
   const modalTitle = document.getElementById("portrait-modal-title");
   const modalYear = document.getElementById("portrait-modal-year");
   const defaultImage = archive.dataset.defaultImage || PAST_MASTERS_DEFAULT_IMAGE;
+  const modalHideDuration = 240;
   let activeRow = null;
+  let clearModalImageTimer = null;
+
+  setupImageFade(modalImage);
 
   modalImage.addEventListener("error", () => {
     modalImage.src = defaultImage;
@@ -243,7 +247,9 @@ function setupPastMastersArchive() {
 
     activeRow = row;
     activeRow.classList.add("is-active");
+    clearTimeout(clearModalImageTimer);
     modalImage.src = image;
+    setupImageFade(modalImage);
     modalImage.alt = `${name} portrait`;
     modalTitle.textContent = name;
     modalYear.textContent = year;
@@ -254,7 +260,15 @@ function setupPastMastersArchive() {
   function closeModal() {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
-    modalImage.src = "";
+    clearTimeout(clearModalImageTimer);
+    clearModalImageTimer = setTimeout(() => {
+      if (modal.classList.contains("is-open")) {
+        return;
+      }
+
+      modalImage.classList.remove("is-loaded");
+      modalImage.src = "";
+    }, modalHideDuration);
 
     if (activeRow) {
       activeRow.classList.remove("is-active");
@@ -313,6 +327,7 @@ function renderPastMasters() {
 
   featuredTarget.innerHTML = featured.map(renderFeaturedMasterCard).join("");
   archiveTarget.innerHTML = archive.map(renderArchiveMasterRow).join("");
+  document.querySelectorAll(".master-portrait img").forEach(setupImageFade);
 }
 
 function renderFeaturedMasterCard(master) {
@@ -367,4 +382,23 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function setupImageFade(image) {
+  if (!image) {
+    return;
+  }
+
+  function markLoaded() {
+    image.classList.add("is-loaded");
+  }
+
+  image.classList.remove("is-loaded");
+
+  if (image.complete && image.naturalWidth > 0) {
+    requestAnimationFrame(markLoaded);
+    return;
+  }
+
+  image.addEventListener("load", markLoaded, { once: true });
 }
