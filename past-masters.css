@@ -245,6 +245,7 @@
 .portrait-modal-dialog {
   position: relative;
   width: min(920px, 100%);
+  min-height: 520px;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr);
   background: #fbf8f4;
@@ -272,7 +273,7 @@
 
 .portrait-modal-media {
   background: #221810;
-  min-height: 520px;
+  height: 520px;
 }
 
 .portrait-modal-media img {
@@ -372,6 +373,7 @@
 
   .portrait-modal-dialog {
     grid-template-columns: 1fr;
+    min-height: 0;
   }
 
   .portrait-modal-close {
@@ -379,6 +381,7 @@
   }
 
   .portrait-modal-media {
+    height: 360px;
     min-height: 360px;
   }
 
